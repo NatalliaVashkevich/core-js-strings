@@ -38,7 +38,7 @@ function getStringLength(value) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return value ? typeof value.valueOf() === 'string' : false;
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -54,7 +54,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return `${value1}${value2}`;
+  return value1.concat(value2);
 }
 
 /**
@@ -146,8 +146,11 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const indexOfValue = str.indexOf(value);
+  const firstPart = str.slice(0, indexOfValue);
+  const lastPart = str.slice(indexOfValue + value.length, str.length);
+  return firstPart + lastPart;
 }
 
 /**
@@ -178,8 +181,10 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  return str
+    ? str.split('').reduce((sum, char) => sum + char.charCodeAt(), 0)
+    : 0;
 }
 
 /**
@@ -193,8 +198,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -208,8 +213,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -225,8 +230,10 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  const min = minutes.toString().padStart(2, '0');
+  const sec = seconds.toString().padStart(2, '0');
+  return `${min}:${sec}`;
 }
 
 /**
