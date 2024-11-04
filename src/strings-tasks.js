@@ -150,7 +150,7 @@ function removeFirstOccurrences(str, value) {
   const indexOfValue = str.indexOf(value);
   const firstPart = str.slice(0, indexOfValue);
   const lastPart = str.slice(indexOfValue + value.length, str.length);
-  return firstPart + lastPart;
+  return indexOfValue !== -1 ? firstPart + lastPart : str;
 }
 
 /**
@@ -165,8 +165,11 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const indexOfValue = str.lastIndexOf(value);
+  const firstPart = str.slice(0, indexOfValue);
+  const lastPart = str.slice(indexOfValue + value.length, str.length);
+  return indexOfValue !== -1 ? firstPart + lastPart : str;
 }
 
 /**
@@ -246,8 +249,8 @@ function formatTime(minutes, seconds) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
